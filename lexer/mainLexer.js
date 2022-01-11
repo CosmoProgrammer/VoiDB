@@ -1,5 +1,8 @@
+const wordCuller = require('./wordCuller.js')
+
 function mainLexer(code){
-    return `LEXED ${code}`;
+    let culledCode = wordCuller(code);
+    return `LEXED ${culledCode}`;
 }
 
 module.exports = mainLexer;
