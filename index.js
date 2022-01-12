@@ -1,5 +1,7 @@
-const mainLexer = require('./lexer/mainLexer.js');
-const mainParser = require('./parser/mainParser.js');
+const path = require('path');
+
+const mainLexer = require(path.join(__dirname, 'lexer', 'mainLexer.js'));
+const mainParser = require(path.join(__dirname, 'parser', 'mainParser.js'));
 
 function voidb(code){
     let lexedCode = mainLexer(code);

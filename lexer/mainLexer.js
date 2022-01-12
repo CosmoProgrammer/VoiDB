@@ -1,4 +1,4 @@
-const wordCuller = require('./wordCuller.js')
+const wordCuller = require(`${__dirname}\\wordCuller.js`);
 
 function mainLexer(code){
     let culledCode = wordCuller(code);
