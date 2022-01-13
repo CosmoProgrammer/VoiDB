@@ -81,10 +81,26 @@ class BodytoDetailsResolver {
         }
         else if(this.action === 'create'){}
         else if(this.action === 'insert'){}
-        else if(this.action === 'delete'){}
-        else if(this.action === 'truncate'){}
-        else if(this.action === 'use'){}
-        else if(this.action === 'default'){};
+        else if(this.action === 'delete'){
+            if(this.body[0] === 'database'){
+                details.object = 'database';
+                details.database = this.body[1];
+            } else if(this.body[0] === 'table'){
+                details.object = 'table';
+                details.table = this.body[1];
+            } else if(this.body[0] === 'storage'){
+                details.object = 'storage';
+            }
+        }
+        else if(this.action === 'truncate'){
+            details.table = this.body[0];
+        }
+        else if(this.action === 'use'){
+            details.database = this.body[0];
+        }
+        else if(this.action === 'default'){
+            details.table = this.body[0];
+        };
         return new ActionDetails(this.action, details);
     }
 
