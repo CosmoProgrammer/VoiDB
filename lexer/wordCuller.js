@@ -1,6 +1,6 @@
 function wordCuller(code){
     //List of all Words to be removed from the code
-    const remove = ['a', 'called', 'with', 'the', 'some', 'and', 'by', 'in', 'from', 'new'];
+    const remove = ['a', 'called', 'with', 'the', 'some', 'and', 'by', 'in', 'from', 'new', 'of'];
 
     //Splits by ; 
     let c_sentences = code.split(';');
