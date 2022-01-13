@@ -8,6 +8,17 @@ class Error {
     }
 }
 
+class ActionBody {
+    constructor(action, body){
+        this.action = action;
+        this.body = body;
+    }
+    display(){
+        console.log(`${this.action}: ${this.body}`);
+    }
+}
+
 module.exports = {
-    Error: Error
+    Error: Error,
+    ActionBody: ActionBody
 }

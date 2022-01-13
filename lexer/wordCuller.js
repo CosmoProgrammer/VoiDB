@@ -1,11 +1,8 @@
-const path = require('path');
-const classes = require(path.join(__dirname, '../', 'classes.js'));
-
 function wordCuller(code){
     //List of all Words to be removed from the code
     const remove = ['a', 'called', 'with', 'the', 'some', 'and', 'by', 'in', 'from', 'new'];
 
-    //Splits by ; but also keeps the ; so that I can merge at the end of the code while keeping the ;
+    //Splits by ; 
     let c_sentences = code.split(';');
     let c=[];
 
@@ -24,11 +21,8 @@ function wordCuller(code){
             }
         }
     }
-
-    let mergedArray = [].concat.apply([], c);
-    console.log(mergedArray.join(' '));
      
-    return code;
+    return c;
 }
 
 module.exports = wordCuller;
