@@ -79,8 +79,28 @@ class BodytoDetailsResolver {
                 details.table = this.body[2];
             }
         }
-        else if(this.action === 'create'){}
-        else if(this.action === 'insert'){}
+        else if(this.action === 'create'){
+            if(this.body[0] === 'table'){
+                details.object = 'table';
+                details.name = this.body[1];
+                details.columns = this.body[3];
+                details.values = this.body[5];
+                details.defaultvals = false;
+                this.body.splice(0,6);
+                if(this.body.length === 2){
+                    details.defaultvals = this.body[1];
+                }
+            } 
+            else if(this.body[0] === 'database'){
+                details.object = 'database';
+                details.name = this.body[1];
+            }
+        }
+        else if(this.action === 'insert'){
+            details.values = this.body[0];
+            details.table = this.body[2];
+            details.columns = this.body[4];
+        }
         else if(this.action === 'delete'){
             if(this.body[0] === 'database'){
                 details.object = 'database';
@@ -101,6 +121,7 @@ class BodytoDetailsResolver {
         else if(this.action === 'default'){
             details.table = this.body[0];
         };
+        
         return new ActionDetails(this.action, details);
     }
 
