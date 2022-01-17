@@ -1,4 +1,1 @@
 create new database called "NewDatabase";
-use "NewDatabase";
-create new table called "NewTable" with columns "[{'id':'number notnull primarykey}, {'name':'string notnull'}, {'gender':'string'}]" and values "[[001, 'Anirudh M', 'Male'], [002, 'Mahathi M', 'Female'], [003, 'Some Book']]" and defaultvalues "[[001, 'Nagalakshmi Abbaraju', 'Female'], [002, 'Rajashekar M', 'Male']]";
-read the table called "NewTable" columns "all" where "id===001 || name==='Mahathi M'" order by "id"; 
