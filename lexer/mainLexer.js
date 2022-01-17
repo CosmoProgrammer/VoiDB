@@ -6,7 +6,7 @@ function mainLexer(code){
     let culledCode = wordCuller(code);
     let actionBodyCode = ActionBodyClassesCreator(culledCode);
     let actionDetailsCode = ActionDetailsClassesCreator(actionBodyCode);
-    return `LEXED ${JSON.stringify(actionDetailsCode)}`;
+    return actionDetailsCode;
 }
 
 module.exports = mainLexer;
