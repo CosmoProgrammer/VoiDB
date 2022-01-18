@@ -12,6 +12,10 @@ Detailed tutorials and documentation will be made available soon.
 
 
 
+
+
+## License
+
 MIT License
 
 Copyright (c) [year] [fullname]
