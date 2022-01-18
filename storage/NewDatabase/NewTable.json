@@ -1,0 +1,42 @@
+{
+  "name": "NewTable",
+  "columns": [
+    {
+      "id": "number notnull primarykey"
+    },
+    {
+      "name": "string notnull"
+    },
+    {
+      "gender": "string"
+    }
+  ],
+  "values": [
+    [
+      101,
+      "Anirudh M",
+      "Male"
+    ],
+    [
+      102,
+      "Mahathi M",
+      "Female"
+    ],
+    [
+      103,
+      "Some Book"
+    ]
+  ],
+  "defaultvalues": [
+    [
+      101,
+      "Nagalakshmi Abbaraju",
+      "Female"
+    ],
+    [
+      102,
+      "Rajashekar M",
+      "Male"
+    ]
+  ]
+}
