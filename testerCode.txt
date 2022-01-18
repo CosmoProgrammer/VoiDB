@@ -1,1 +1,2 @@
 create new database called "NewDatabase";
+use "NewDatabase";

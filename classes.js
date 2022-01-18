@@ -8,6 +8,15 @@ class Error {
     }
 }
 
+class Success {
+    constructor(message){
+        this.message = message;
+    }
+    display(){
+        return this.message;
+    }
+}
+
 class ActionBody {
     constructor(action, body){
         this.action = action;
@@ -137,6 +146,7 @@ class BodytoDetailsResolver {
 
 module.exports = {
     Error: Error,
+    Success: Success,
     ActionBody: ActionBody,
     BodytoDetailsResolver: BodytoDetailsResolver,
     ActionDetails: ActionDetails

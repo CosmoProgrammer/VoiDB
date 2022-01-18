@@ -1,4 +1,4 @@
 {
-    "usingDatabase": null,
-    "messageMode": true
+  "usingDatabase": "NewDatabase",
+  "messageMode": true
 }
