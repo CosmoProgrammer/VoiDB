@@ -8,7 +8,7 @@ class hashPassword{constructor(index){this.index = index;}}
 
 
 function valueChecker(columns, values){
-    let exceptionTypes = ['password', 'email'];
+    let exceptionTypes = ['password'];
     let needToHash = false;
     let index;
     for(let x in values) {
@@ -33,7 +33,7 @@ function valueChecker(columns, values){
 }
 
 function defaultvalueChecker(columns, values){
-    let exceptionTypes = ['password', 'email'];
+    let exceptionTypes = ['password'];
     for(let x in values) {
         let expectedType = (Object.values(columns[x])[0].split(' '))[0];
         let actualType = typeof values[x];
