@@ -11,9 +11,11 @@ function valueChecker(columns, values){
     let exceptionTypes = ['password'];
     let needToHash = false;
     let index;
+    if(columns.length !== values.length){
+        return new classes.Error('TypeError', `Number of values: ${values.length} must be equal to number of columns: ${columns.length}`);
+    }
     for(let x in values) {
         let expectedType = (Object.values(columns[x])[0].split(' '))[0];
-        //console.log(expectedType)
         let actualType = typeof values[x];
         if(!(exceptionTypes.includes(expectedType))){
             if(!(expectedType === actualType)){
@@ -34,6 +36,11 @@ function valueChecker(columns, values){
 
 function defaultvalueChecker(columns, values){
     let exceptionTypes = ['password'];
+    let needToHash = false;
+    let index;
+    if(columns.length !== values.length){
+        return new classes.Error('TypeError', `Number of values: ${values.length} must be equal to number of columns: ${columns.length}`);
+    }
     for(let x in values) {
         let expectedType = (Object.values(columns[x])[0].split(' '))[0];
         let actualType = typeof values[x];
@@ -48,7 +55,6 @@ function defaultvalueChecker(columns, values){
                 if(actualType !== 'string'){
                     return new classes.Error('TypeError', `Password has to be a sting. Type of ${values[x]} is ${actualType} and not String`)
                 }
-                //console.log(`Hiiiiiiiii`)
             }
         }
     }

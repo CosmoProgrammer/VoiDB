@@ -2,10 +2,10 @@
   "name": "NewTable",
   "columns": [
     {
-      "id": "number notnull primarykey"
+      "id": "number primarykey"
     },
     {
-      "name": "string notnull"
+      "name": "string"
     },
     {
       "pword": "password"
@@ -15,28 +15,29 @@
     [
       101,
       "Anirudh M",
-      "$2b$10$lOfPlwGUXc2lPfgS..PDVegXx61EZRkz/VR8exkQ9XyAX7fKh0nbe"
+      "$2b$10$erB.NPnxS2TZJ9Ox0phI3ebB39fCGqmiRCvqcGZM/KkQRlJxIjGCG"
     ],
     [
       102,
       "Mahathi M",
-      "$2b$10$DC5Mav5Ptm7lgpueOkZbL.8Xx7n7J70NfKNPeue5kqh7Cy3wgRxqe"
+      "$2b$10$VeTiRdP6gcIf/7yuC1pQFuB2mp8gvsbEOLYfe7kfsxSwsFidzWg5i"
     ],
     [
       103,
-      "Some Book"
+      "Some Book",
+      "$2b$10$8lTLUOG7WMEECxLyuorCdeTZdNDUeYImHLs3H3gHXNjbpYiseM7c2"
     ]
   ],
   "defaultvalues": [
     [
       101,
       "Nagalakshmi Abbaraju",
-      "$2b$10$cZQwkl5qm8hbsmGaxiaV/.OPWhs4qIcq92uXPaPzgJnGKqKLjnmBO"
+      "$2b$10$N5TyWM2qWV72ZhvY4SGDBul3x.hlZxmDfgU2iJIT6MvDlr5nxe0Yu"
     ],
     [
       102,
       "Rajashekar M",
-      "$2b$10$9hjqLOSB0Mu9PzQwMlGTe.vqdt8sd3iKq2E/SajGMZjP0GKW0phfe"
+      "$2b$10$/SImQwhFCqnURvIGr088DOfJh8FYcmwRBl7KycXuIshQ9WyUuOLSa"
     ]
   ]
 }
