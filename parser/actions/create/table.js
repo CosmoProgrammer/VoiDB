@@ -1,20 +1,35 @@
 const fs = require('fs');
+const bcrypt = require('bcrypt');
 const path = require('path');
 const classes = require(path.join(__dirname, '../../../', 'classes.js'));
 
+class hashPassword{constructor(index){this.index = index;}}
+
+
+
 function valueChecker(columns, values){
     let exceptionTypes = ['password', 'email'];
+    let needToHash = false;
+    let index;
     for(let x in values) {
         let expectedType = (Object.values(columns[x])[0].split(' '))[0];
+        //console.log(expectedType)
         let actualType = typeof values[x];
         if(!(exceptionTypes.includes(expectedType))){
             if(!(expectedType === actualType)){
-                return [false, new classes.Error('TypeError', `Values don't match with Types. Type of ${values[x]} is ${actualType} and not ${expectedType}`)];
+                return new classes.Error('TypeError', `Values don't match with Types. Type of ${values[x]} is ${actualType} and not ${expectedType}`);
             };
         } else{
-            
+            if(expectedType === 'password'){
+                needToHash = true;
+                index = x;
+                if(actualType !== 'string'){
+                    return new classes.Error('TypeError', `Password has to be a sting. Type of ${values[x]} is ${actualType} and not String`)
+                }
+            }
         }
     }
+    if(needToHash) return new hashPassword(index);
 }
 
 function defaultvalueChecker(columns, values){
@@ -27,9 +42,17 @@ function defaultvalueChecker(columns, values){
                 return [false, new classes.Error('TypeError', `Default Values don't match with Types. Type of ${values[x]} is ${actualType} and not ${expectedType}`)];
             };
         } else{
-            
+            if(expectedType === 'password'){
+                needToHash = true;
+                index = x;
+                if(actualType !== 'string'){
+                    return new classes.Error('TypeError', `Password has to be a sting. Type of ${values[x]} is ${actualType} and not String`)
+                }
+                //console.log(`Hiiiiiiiii`)
+            }
         }
     }
+    if(needToHash) return new hashPassword(index);
 }
 
 function createTable(code, preRunData){
@@ -42,8 +65,11 @@ function createTable(code, preRunData){
     table['columns'] = cols;
     for(let y in vals){
         let tempCheckerResult = valueChecker(cols, vals[y])
-        if(tempCheckerResult!==undefined){
-            return tempCheckerResult[1]
+        if(tempCheckerResult instanceof classes.Error){
+            return tempCheckerResult;
+        } else if(tempCheckerResult instanceof hashPassword){
+            let hash = bcrypt.hashSync(vals[y][tempCheckerResult['index']], 10 );
+            vals[y][tempCheckerResult['index']] = hash;
         }
         //console.log(`checked ${vals[y]}`)
     }
@@ -51,8 +77,11 @@ function createTable(code, preRunData){
     let dvals = JSON.parse(code.details.defaultvals.replace(/'/g, '\"'));
     for(let y in dvals){
         let tempCheckerResult = defaultvalueChecker(cols, dvals[y])
-        if(tempCheckerResult!==undefined){
-            return tempCheckerResult[1]
+        if(tempCheckerResult instanceof classes.Error){
+            return tempCheckerResult;
+        }else if(tempCheckerResult instanceof hashPassword){
+            let hash = bcrypt.hashSync(dvals[y][tempCheckerResult['index']], 10 );
+            dvals[y][tempCheckerResult['index']] = hash;
         }
         //console.log(`checked default value ${dvals[y]}`)
     }

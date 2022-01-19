@@ -1,3 +1,3 @@
 create new database called "NewDatabase";
 use "NewDatabase";
-create new table called "NewTable" with columns "[{'id':'number notnull primarykey'}, {'name':'string notnull'}, {'gender':'string'}]" and values "[[101, 'Anirudh M', 'Male'], [102, 'Mahathi M', 'Female'], [103, 'Some Book']]" and defaultvalues "[[101, 'Nagalakshmi Abbaraju', 'Female'], [102, 'Rajashekar M', 'Male']]";
+create new table called "NewTable" with columns "[{'id':'number notnull primarykey'}, {'name':'string notnull'}, {'pword':'password'}]" and values "[[101, 'Anirudh M', 'pokemon2345'], [102, 'Mahathi M', '6a6ab836a8'], [103, 'Some Book']]" and defaultvalues "[[101, 'Nagalakshmi Abbaraju', '05504503'], [102, 'Rajashekar M', 'Buddi2628!@']]";
