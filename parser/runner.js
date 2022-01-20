@@ -1,6 +1,7 @@
 const actions = {
     create: require(`${__dirname}\\actions\\create\\create.js`),
-    use: require(`${__dirname}\\actions\\use\\use.js`)
+    use: require(`${__dirname}\\actions\\use\\use.js`),
+    delete: require(`${__dirname}\\actions\\delete\\delete.js`)
 }
 
 function run(code, preRunData){
@@ -8,6 +9,8 @@ function run(code, preRunData){
         return actions.create(code, preRunData)
     } else if(code.action==="use"){
         return actions.use(code, preRunData);
+    } else if(code.action==="delete"){
+        return actions.delete(code, preRunData);
     }
     return code.action;
 }
