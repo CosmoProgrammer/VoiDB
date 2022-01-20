@@ -1,43 +1,27 @@
 {
-  "name": "NewTable",
-  "columns": [
-    {
-      "id": "number primarykey"
-    },
-    {
-      "name": "string"
-    },
-    {
-      "pword": "password"
-    }
-  ],
-  "values": [
-    [
-      101,
-      "Anirudh M",
-      "$2b$10$4XLr894/.ycdKX4NvPNHT.ja4TsR7W9yQtD.uIAXl27qZoAtxHQXi"
+    "name": "NewTable",
+    "columns": [
+        {
+            "id": "number primarykey"
+        },
+        {
+            "name": "string"
+        },
+        {
+            "pword": "password"
+        }
     ],
-    [
-      102,
-      "Mahathi M",
-      "$2b$10$rdro6R2drDvME2RjrmdamefEdk6T1q3jiFgZdXl4Wjhd1oawJ92ea"
-    ],
-    [
-      103,
-      "Some Book",
-      "$2b$10$AJshraDy5elmvDjOn4cCZe/CFxrt10PHLp3EfH3RbhPcWAu530NwC"
+    "values": [],
+    "defaultvalues": [
+        [
+            101,
+            "Nagalakshmi Abbaraju",
+            "$2b$10$VNP6YoL/jtsYeaDuZhyNGuCmmS5QVdvMDEG.rv/XbB5Hecwt8/96W"
+        ],
+        [
+            102,
+            "Rajashekar M",
+            "$2b$10$qo.QfIR82/ky2oCXvRDIH.C/dDaQJx3QVVgcfOKrx4HXCmXBGKcPe"
+        ]
     ]
-  ],
-  "defaultvalues": [
-    [
-      101,
-      "Nagalakshmi Abbaraju",
-      "$2b$10$e26G3m/Bsh3.ZoKXVVUrGe4cRlvhGnbgQ.EI4hTvkxN1uQ8H5Uztq"
-    ],
-    [
-      102,
-      "Rajashekar M",
-      "$2b$10$wTYAZA/HXdBfWL.tL/kVruBaK0y24G6URdg9Gfg7WpCnMQK2rcZPy"
-    ]
-  ]
 }
