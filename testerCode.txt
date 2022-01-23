@@ -6,3 +6,4 @@ truncate "NewTable";
 default "NewTable";
 select databases;
 select tables;
+select columns "NewTable";

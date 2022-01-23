@@ -95,7 +95,7 @@ class BodytoDetailsResolver {
             }
             else if(this.body[0] === 'columns'){
                 details.object = 'columns';
-                details.table = this.body[2];
+                details.table = this.body[1];
             }
         }
         else if(this.action === 'create'){
