@@ -3,7 +3,8 @@ const actions = {
     use: require(`${__dirname}\\actions\\use\\use.js`),
     delete: require(`${__dirname}\\actions\\delete\\delete.js`),
     truncate: require(`${__dirname}\\actions\\truncate\\truncate.js`),
-    default: require(`${__dirname}\\actions\\default\\default.js`)
+    default: require(`${__dirname}\\actions\\default\\default.js`),
+    select: require(`${__dirname}\\actions\\select\\select.js`)
 }
 
 function run(code, preRunData){
@@ -17,6 +18,8 @@ function run(code, preRunData){
         return actions.truncate(code, preRunData);
     } else if(code.action==='default'){
         return actions.default(code, preRunData);
+    } else if(code.action==='select'){
+        return actions.select(code, preRunData);
     }
     return code.action;
 }

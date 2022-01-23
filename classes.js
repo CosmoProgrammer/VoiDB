@@ -13,7 +13,17 @@ class Success {
         this.message = message;
     }
     display(){
-        return this.message;
+        console.log(this.message);
+    }
+}
+
+class Data {
+    constructor(data, info){
+        this.info = info;
+        this.data = data;
+    }
+    display(){
+        console.table(this.data);
     }
 }
 
@@ -49,7 +59,7 @@ class BodytoDetailsResolver {
         if(this.action === 'select'){
             if(this.body[0] === 'tables'){
                 details.object = 'tables';
-                details.name = this.body[1];
+                details.name = this.body[0];
             }
             else if(this.body[0] === 'databases'){
                 details.object = 'databases';
@@ -149,5 +159,6 @@ module.exports = {
     Success: Success,
     ActionBody: ActionBody,
     BodytoDetailsResolver: BodytoDetailsResolver,
-    ActionDetails: ActionDetails
+    ActionDetails: ActionDetails,
+    Data: Data
 }
