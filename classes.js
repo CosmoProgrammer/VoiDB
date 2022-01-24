@@ -141,7 +141,9 @@ class BodytoDetailsResolver {
             details.table = this.body[0];
         };
         for(let x in details){
-            details[x] = details[x].replace(/(^"|"$)/g, '')
+            if(typeof details[x] !== 'boolean'){
+                details[x] = details[x].replace(/(^"|"$)/g, '')
+            }
         }
         return new ActionDetails(this.action, details);
     }
