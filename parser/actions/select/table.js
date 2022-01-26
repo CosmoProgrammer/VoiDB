@@ -46,7 +46,7 @@ function readValues(code, preRunData, table){
         return acc;
     }, {}));
     let finalResult = filterColumns(colVals);
-    return new classes.Data(finalResult, `This is the requested values from the table ${code.table}`)
+    return new classes.Data(finalResult, `This is the requested values from the table ${table.name}`)
 }
 
 function readValuesWhere(code, preRunData, table){
@@ -73,11 +73,13 @@ function readValuesWhere(code, preRunData, table){
         return acc;
     }, {}));
     let finalResult = filterColumns(colVals);
-    return new classes.Data(finalResult, `This is the requested values from the table ${code.table}`)
+    return new classes.Data(finalResult, `This is the requested values from the table ${table.name}`)
 }
 
 function readValuesOrder(code, preRunData, table){
     console.log('IN ORDER')
+    let order = code.order.split(' ')[0];
+    let ascdesc = code.order.split(' ')[1];
     let actualColumns = readColumns(new classes.ActionDetails('select', {object: 'columns', table: code.name}), preRunData).data[0];
     if(code.columns==='all'){
         code.columns=actualColumns;
@@ -100,7 +102,13 @@ function readValuesOrder(code, preRunData, table){
         return acc;
     }, {}));
     let finalResult = filterColumns(colVals);
-    return new classes.Data(finalResult, `This is the requested values from the table ${code.table}`)
+    if(ascdesc === 'asc' || ascdesc === 'ascending'){
+        eval(`finalResult = finalResult.sort((a,b)=> (a['${order}'] > b['${order}'] ? 1 : -1))`)
+    } else if(ascdesc === 'descending' || ascdesc === 'desc'){
+        eval(`finalResult = finalResult.sort((a,b)=> (a['${order}'] < b['${order}'] ? 1 : -1))`)
+    }
+    console.log(finalResult);
+    return new classes.Data(finalResult, `This is the requested values from the table ${table.name}`)
 }
 
 function readValuesWhereOrder(code, preRunData, table){
@@ -127,7 +135,7 @@ function readValuesWhereOrder(code, preRunData, table){
         return acc;
     }, {}));
     let finalResult = filterColumns(colVals);
-    return new classes.Data(finalResult, `This is the requested values from the table ${code.table}`)
+    return new classes.Data(finalResult, `This is the requested values from the table ${table.name}`)
 }
 
 module.exports = selectTable;
