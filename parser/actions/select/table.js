@@ -50,7 +50,7 @@ function readValues(code, preRunData, table){
 }
 
 function readValuesWhere(code, preRunData, table){
-    console.log('IN WHERE')
+    //console.log('IN WHERE')
     let whereConditionUnparsed = code.where;
     let whereConditionParsed = whereConditionUnparsed.replace('||', 'splithere').replace('&&', 'splitthere').split(' splithere ');
     let whereCondition = [];
@@ -92,7 +92,7 @@ function readValuesWhere(code, preRunData, table){
 }
 
 function readValuesOrder(code, preRunData, table){
-    console.log('IN ORDER')
+    //console.log('IN ORDER')
     let order = code.order.split(' ')[0];
     let ascdesc = code.order.split(' ')[1];
     let actualColumns = readColumns(new classes.ActionDetails('select', {object: 'columns', table: code.name}), preRunData).data[0];
@@ -126,7 +126,7 @@ function readValuesOrder(code, preRunData, table){
 }
 
 function readValuesWhereOrder(code, preRunData, table){
-    console.log('IN WHERE & ORDER')
+    //console.log('IN WHERE & ORDER')
     let whereConditionUnparsed = code.where;
     let whereConditionParsed = whereConditionUnparsed.replace('||', 'splithere').replace('&&', 'splitthere').split(' splithere ');
     let whereCondition = [];
