@@ -23,7 +23,7 @@ function findTypeAndExecute(code, preRunData, table){
 }
 
 function readValues(code, preRunData, table){
-    console.log('IN ONLY SELECT')
+    //console.log('IN ONLY SELECT')
     let actualColumns = readColumns(new classes.ActionDetails('select', {object: 'columns', table: code.name}), preRunData).data[0];
     if(code.columns==='all'){
         code.columns=actualColumns;
@@ -51,6 +51,12 @@ function readValues(code, preRunData, table){
 
 function readValuesWhere(code, preRunData, table){
     console.log('IN WHERE')
+    let whereConditionUnparsed = code.where;
+    let whereConditionParsed = whereConditionUnparsed.replace('||', 'splithere').replace('&&', 'splitthere').split(' splithere ');
+    let whereCondition = [];
+    for(let x in whereConditionParsed){
+        whereCondition.push(new whereConditionObject(whereConditionParsed[x]))
+    }
     let actualColumns = readColumns(new classes.ActionDetails('select', {object: 'columns', table: code.name}), preRunData).data[0];
     if(code.columns==='all'){
         code.columns=actualColumns;
@@ -73,7 +79,16 @@ function readValuesWhere(code, preRunData, table){
         return acc;
     }, {}));
     let finalResult = filterColumns(colVals);
-    return new classes.Data(finalResult, `This is the requested values from the table ${table.name}`)
+
+    for(let x in finalResult) {
+        if(checkIfRowIsToBeRemoved(finalResult[x], whereCondition)){
+            finalResult[x] = null;
+        }
+    }
+    let filtered = finalResult.filter(function (el) {
+        return el != null;
+    });
+    return new classes.Data(filtered, `This is the requested values from the table ${table.name}`)
 }
 
 function readValuesOrder(code, preRunData, table){
@@ -107,12 +122,19 @@ function readValuesOrder(code, preRunData, table){
     } else if(ascdesc === 'descending' || ascdesc === 'desc'){
         eval(`finalResult = finalResult.sort((a,b)=> (a['${order}'] < b['${order}'] ? 1 : -1))`)
     }
-    console.log(finalResult);
     return new classes.Data(finalResult, `This is the requested values from the table ${table.name}`)
 }
 
 function readValuesWhereOrder(code, preRunData, table){
     console.log('IN WHERE & ORDER')
+    let whereConditionUnparsed = code.where;
+    let whereConditionParsed = whereConditionUnparsed.replace('||', 'splithere').replace('&&', 'splitthere').split(' splithere ');
+    let whereCondition = [];
+    for(let x in whereConditionParsed){
+        whereCondition.push(new whereConditionObject(whereConditionParsed[x]))
+    }
+    let order = code.order.split(' ')[0];
+    let ascdesc = code.order.split(' ')[1];
     let actualColumns = readColumns(new classes.ActionDetails('select', {object: 'columns', table: code.name}), preRunData).data[0];
     if(code.columns==='all'){
         code.columns=actualColumns;
@@ -135,7 +157,48 @@ function readValuesWhereOrder(code, preRunData, table){
         return acc;
     }, {}));
     let finalResult = filterColumns(colVals);
-    return new classes.Data(finalResult, `This is the requested values from the table ${table.name}`)
+    if(ascdesc === 'asc' || ascdesc === 'ascending'){
+        eval(`finalResult = finalResult.sort((a,b)=> (a['${order}'] > b['${order}'] ? 1 : -1))`)
+    } else if(ascdesc === 'descending' || ascdesc === 'desc'){
+        eval(`finalResult = finalResult.sort((a,b)=> (a['${order}'] < b['${order}'] ? 1 : -1))`)
+    }
+    for(let x in finalResult) {
+        if(checkIfRowIsToBeRemoved(finalResult[x], whereCondition)){
+            finalResult[x] = null;
+        }
+    }
+    let filtered = finalResult.filter(function (el) {
+        return el != null;
+    });
+    return new classes.Data(filtered, `This is the requested values from the table ${table.name}`)
+}
+
+function checkIfRowIsToBeRemoved(row, whereConditions){
+    let checker = false;
+    for(let i in whereConditions){
+        eval(
+            `if(!('${row[whereConditions[i]['column']]}' ${whereConditions[i]['operater']} '${whereConditions[i]['value']}')){
+                checker = true;
+            }`
+        );
+        if(checker){
+            return true;
+        }
+    }
+    return false;
+}
+
+class whereConditionObject{
+    constructor(part) {
+        let tempvalue = (part.replace(/\'/g, '\"').match(/\w+|"[^"]+"/g))[1];
+        this.column = part.split(' ')[0];
+        this.operater = part.split(' ')[1];
+        if(isNaN(Number(tempvalue))) {
+            this.value = tempvalue.replace(/^"(.*)"$/, '$1');
+        } else{
+            this.value = Number(tempvalue);
+        }
+    }
 }
 
 module.exports = selectTable;
