@@ -4,6 +4,14 @@ create new table called "NewTable" with columns "[{'id':'number notnull primaryk
 read the table called "NewTable" columns "all" where "id===001 || name==='Mahathi M'" order by "id"; 
 select table "NewTable" columns "['pword','name', 'id']" order by "name desc";
 
+
+
+
+
+
+
+
+
 delete database called "NewDatabase";
 create new database called "NewDatabase";
 use "NewDatabase";

@@ -52,7 +52,13 @@ function readValues(code, preRunData, table){
 function readValuesWhere(code, preRunData, table){
     //console.log('IN WHERE')
     let whereConditionUnparsed = code.where;
-    let whereConditionParsed = whereConditionUnparsed.replace('||', 'splithere').replace('&&', 'splitthere').split(' splithere ');
+    let logicalOperator = null;
+    if(whereConditionUnparsed.indexOf('||') > -1){
+        logicalOperator = '||';
+    } else if(whereConditionUnparsed.indexOf('&&') > -1){
+        logicalOperator = '&&';
+    }
+    let whereConditionParsed = whereConditionUnparsed.replace('||', 'splithere').replace('&&', 'splithere').split(' splithere ');
     let whereCondition = [];
     for(let x in whereConditionParsed){
         whereCondition.push(new whereConditionObject(whereConditionParsed[x]))
@@ -81,7 +87,7 @@ function readValuesWhere(code, preRunData, table){
     let finalResult = filterColumns(colVals);
 
     for(let x in finalResult) {
-        if(checkIfRowIsToBeRemoved(finalResult[x], whereCondition)){
+        if(checkIfRowIsToBeRemoved(finalResult[x], whereCondition, logicalOperator)){
             finalResult[x] = null;
         }
     }
@@ -128,7 +134,13 @@ function readValuesOrder(code, preRunData, table){
 function readValuesWhereOrder(code, preRunData, table){
     //console.log('IN WHERE & ORDER')
     let whereConditionUnparsed = code.where;
-    let whereConditionParsed = whereConditionUnparsed.replace('||', 'splithere').replace('&&', 'splitthere').split(' splithere ');
+    let logicalOperator = null;
+    if(whereConditionUnparsed.indexOf('||') > -1){
+        logicalOperator = '||';
+    } else if(whereConditionUnparsed.indexOf('&&') > -1){
+        logicalOperator = '&&';
+    }
+    let whereConditionParsed = whereConditionUnparsed.replace('||', 'splithere').replace('&&', 'splithere').split(' splithere ');
     let whereCondition = [];
     for(let x in whereConditionParsed){
         whereCondition.push(new whereConditionObject(whereConditionParsed[x]))
@@ -163,7 +175,7 @@ function readValuesWhereOrder(code, preRunData, table){
         eval(`finalResult = finalResult.sort((a,b)=> (a['${order}'] < b['${order}'] ? 1 : -1))`)
     }
     for(let x in finalResult) {
-        if(checkIfRowIsToBeRemoved(finalResult[x], whereCondition)){
+        if(checkIfRowIsToBeRemoved(finalResult[x], whereCondition, logicalOperator)){
             finalResult[x] = null;
         }
     }
@@ -173,11 +185,36 @@ function readValuesWhereOrder(code, preRunData, table){
     return new classes.Data(filtered, `This is the requested values from the table ${table.name}`)
 }
 
-function checkIfRowIsToBeRemoved(row, whereConditions){
+function checkIfRowIsToBeRemoved(row, whereConditions, loperator){
     let checker = false;
+    let conditions = [];
     for(let i in whereConditions){
-        eval(
+        conditions.push(`('${row[whereConditions[i]['column']]}' ${whereConditions[i]['operater']} '${whereConditions[i]['value']}')`)
+        /*eval(
             `if(!('${row[whereConditions[i]['column']]}' ${whereConditions[i]['operater']} '${whereConditions[i]['value']}')){
+                checker = true;
+            }`
+        );
+        console.log(conditions)
+        if(checker){
+            return true;
+        }*/
+    }
+    if(loperator !== null){
+        /*console.log(`if(!(${conditions[0]} ${loperator} ${conditions[1]})){
+            checker = true;
+        }`)*/
+        eval(
+            `if(!(${conditions[0]} ${loperator} ${conditions[1]})){
+                checker = true;
+            }`
+        );
+        if(checker){
+            return true;
+        }
+    } else if(loperator === null){
+        eval(
+            `if(!${conditions[0]}){
                 checker = true;
             }`
         );
