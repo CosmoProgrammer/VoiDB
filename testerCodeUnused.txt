@@ -22,3 +22,4 @@ select databases;
 select tables;
 select columns "NewTable";
 select table "NewTable" columns "['pword','name', 'id']" where "name === 'Nagalakshmi Abbaraju' || id === 102";
+insert "[[104, 'Nagalakshmi Abbaraju', '05504503'], [105, 'Rajashekar M', 'Buddi2628!@']]" into "NewTable" columns "*";

@@ -8,6 +8,10 @@ class hashPassword{constructor(index){this.index = index;}}
 
 
 function valueChecker(columns, values){
+    /*console.log('in valueChecker');
+    console.log(columns);
+    console.log(values);
+    console.log('exitting column check')*/
     let exceptionTypes = ['password'];
     let needToHash = false;
     let index;
@@ -80,18 +84,22 @@ function createTable(code, preRunData){
         //console.log(`checked ${vals[y]}`)
     }
     table['values'] = vals;
-    let dvals = JSON.parse(code.details.defaultvals.replace(/'/g, '\"'));
-    for(let y in dvals){
-        let tempCheckerResult = defaultvalueChecker(cols, dvals[y])
-        if(tempCheckerResult instanceof classes.Error){
-            return tempCheckerResult;
-        }else if(tempCheckerResult instanceof hashPassword){
-            let hash = bcrypt.hashSync(dvals[y][tempCheckerResult['index']], 10 );
-            dvals[y][tempCheckerResult['index']] = hash;
+    if(code.details.defaultvals !== false){
+        let dvals = JSON.parse(code.details.defaultvals.replace(/'/g, '\"'));
+        for(let y in dvals){
+            let tempCheckerResult = defaultvalueChecker(cols, dvals[y])
+            if(tempCheckerResult instanceof classes.Error){
+                return tempCheckerResult;
+            }else if(tempCheckerResult instanceof hashPassword){
+                let hash = bcrypt.hashSync(dvals[y][tempCheckerResult['index']], 10 );
+                dvals[y][tempCheckerResult['index']] = hash;
+            }
+            //console.log(`checked default value ${dvals[y]}`)
         }
-        //console.log(`checked default value ${dvals[y]}`)
+        table['defaultvalues'] = dvals;
+    } else{
+        table['defaultvalues'] = false;
     }
-    table['defaultvalues'] = dvals;
     let USING_DATABASE = preRunData[1];
     if(USING_DATABASE===''){return "KeyError: Not using any database currently"};
     if(fs.existsSync(`${storagePath}\\${USING_DATABASE}\\${table.name}.json`)){
