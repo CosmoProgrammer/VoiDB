@@ -139,6 +139,13 @@ class BodytoDetailsResolver {
         }
         else if(this.action === 'default'){
             details.table = this.body[0];
+        }
+        else if(this.action === 'validate'){
+            details.usernameColumn = this.body[1];
+            details.passwordColumn = this.body[4];
+            details.username = this.body[2];
+            details.password = this.body[5];
+            details.table = this.body[7];
         };
         for(let x in details){
             if(typeof details[x] !== 'boolean'){

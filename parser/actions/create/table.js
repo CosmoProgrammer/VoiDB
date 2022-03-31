@@ -79,6 +79,7 @@ function createTable(code, preRunData){
             return tempCheckerResult;
         } else if(tempCheckerResult instanceof hashPassword){
             let hash = bcrypt.hashSync(vals[y][tempCheckerResult['index']], 10 );
+            //console.log(vals[y][tempCheckerResult['index']] + " is " + hash);
             vals[y][tempCheckerResult['index']] = hash;
         }
         //console.log(`checked ${vals[y]}`)

@@ -3,7 +3,7 @@ const classes = require(path.join(__dirname, '../', 'classes.js'));
 
 function ActionBodyClassesCreator(code){
     //List of all the action words that can be used
-    const mainActions = ['create', 'select', 'insert', 'delete', 'use', 'truncate', 'default'];
+    const mainActions = ['create', 'select', 'insert', 'delete', 'use', 'truncate', 'default', 'validate'];
     let ActionBodyClasses = [];
 
     //Replaces all alternative action words with the main action words

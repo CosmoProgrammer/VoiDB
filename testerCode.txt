@@ -6,3 +6,4 @@ select table "NewTable" columns "*";
 select table "NewTable" columns "['pword','name', 'id']" where "name === 'Anirudh M' || id === 102" order by "id desc";
 insert "[[104, 'Nagalakshmi Abbaraju', '05504503'], [105, 'Rajashekar M', 'Buddi2628!@']]" into "NewTable" columns "*";
 select table "NewTable" columns "*";
+validate username "name" "Mahathi M" password "pword" "6a6ab836a8" table "NewTable";

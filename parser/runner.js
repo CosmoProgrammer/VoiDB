@@ -5,7 +5,8 @@ const actions = {
     truncate: require(`${__dirname}\\actions\\truncate\\truncate.js`),
     default: require(`${__dirname}\\actions\\default\\default.js`),
     select: require(`${__dirname}\\actions\\select\\select.js`),
-    insert: require(`${__dirname}\\actions\\insert\\insert.js`)
+    insert: require(`${__dirname}\\actions\\insert\\insert.js`),
+    validate: require(`${__dirname}\\actions\\validate\\validate.js`)
 }
 
 function run(code, preRunData){
@@ -23,6 +24,8 @@ function run(code, preRunData){
         return actions.select(code, preRunData);
     } else if(code.action==='insert'){
         return actions.insert(code, preRunData);
+    } else if(code.action==='validate'){
+        return actions.validate(code, preRunData);
     }
     return code.action;
 }

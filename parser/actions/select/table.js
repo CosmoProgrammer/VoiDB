@@ -5,6 +5,7 @@ const readColumns = require(path.join(__dirname, 'columns.js'))
 
 function selectTable(code, preRunData){
     let storagePath = path.join(__dirname, '../../../', 'storage', `${preRunData[1]}`, `${code.details.name}.json`);
+    console.log(code)
     if(code.details.columns === '*'){code.details.columns = 'all'}
     const table = require(storagePath);
     return findTypeAndExecute(code.details, preRunData, table)
