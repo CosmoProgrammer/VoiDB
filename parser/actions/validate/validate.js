@@ -12,13 +12,12 @@ function actionInsert(code, preRunData){
         if(table === undefined){
             return new classes.Error('StorageError', 'Columns or Table not found');
         }
-        console.log(table);
         for(let x in table) {
             if(bcrypt.compareSync(code.details.password, table[x]['pword'])){
-                return new classes.Success(`Validation Successful`);
+                return new classes.Success(true);
             }
         }
-        return new classes.Success(`Validation Failed`);
+        return new classes.Success(false);
     }catch(error) {
         return new classes.Error(`Validation Error`, 'Something has gone wrong during validation')
     }
