@@ -1,0 +1,48 @@
+{
+  "name": "teachers",
+  "columns": [
+    {
+      "id": "number primarykey"
+    },
+    {
+      "name": "string"
+    },
+    {
+      "classteacher": "boolean"
+    }
+  ],
+  "values": [
+    [
+      1,
+      "Nandini R",
+      true
+    ],
+    [
+      2,
+      "Gayathri B",
+      false
+    ],
+    [
+      3,
+      "Prateesh P",
+      false
+    ]
+  ],
+  "defaultvalues": [
+    [
+      1,
+      "Nandini R",
+      true
+    ],
+    [
+      2,
+      "Gayathri B",
+      false
+    ],
+    [
+      3,
+      "Prateesh P",
+      false
+    ]
+  ]
+}

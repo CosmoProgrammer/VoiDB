@@ -1,9 +1,1 @@
-delete database called "NewDatabase";
-create new database called "NewDatabase";
-use "NewDatabase";
-create new table called "NewTable" with columns "[{'id':'number primarykey'}, {'name':'string'}, {'pword':'password'}]" and values "[[101, 'Anirudh M', 'pokemon2345'], [102, 'Mahathi M', '6a6ab836a8'], [103, 'Srikari Seethiraju', 'ladidadida']]";
-select table "NewTable" columns "*";
-select table "NewTable" columns "['pword','name', 'id']" where "name === 'Anirudh M' || id === 102" order by "id desc";
-insert "[[104, 'Nagalakshmi Abbaraju', '05504503'], [105, 'Rajashekar M', 'Buddi2628!@']]" into "NewTable" columns "*";
-select table "NewTable" columns "*";
-validate username "name" "Mahathi M" password "pword" "6a6ab836a8" table "NewTable";
+read table "teachers";

@@ -67,7 +67,11 @@ class BodytoDetailsResolver {
             else if(this.body[0] === 'table'){
                 details.object = 'table';
                 details.name = this.body[1];
-                details.columns = this.body[3];
+                if(this.body[3]!==undefined){
+                    details.columns = this.body[3];
+                } else{
+                    details.columns = "*";
+                }
                 this.body.splice(0, 4);
                 details.where = false;
                 details.order = false;
