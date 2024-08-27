@@ -54,3 +54,10 @@ select table "NewTable" columns "['pword','name', 'id']" where "name === 'Anirud
 insert "[[104, 'Nagalakshmi Abbaraju', '05504503'], [105, 'Rajashekar M', 'Buddi2628!@']]" into "NewTable" columns "*";
 select table "NewTable" columns "*";
 validate username "name" "Mahathi M" password "pword" "6a6ab836a8" table "NewTable";
+
+create new database "TestingAfterYears";
+use database "TestingAfterYears";
+create new table "students" with columns "[{'name':'string'}, {'username':'string primarykey'}, {'pword':'password'}]" amd values "[['Anirudh M', 'F2024A7PS0020H', 'testing1234'], ['Harshul Aggarwal', 'F2024A7PS0010', 'roommateperks'], ['Kaustubh Ghate', 'F2024B1PS1071', 'bastarddidntfreezecampus']]" and defaultvalues "[['Anirudh M', 'F2024A7PS0020H', 'testing1234']]";
+create new table "professors" with columns "[{'id': 'number primarykey'}, {'name':'string'}, {'subject':'string'}]" and values "[[100, 'Prabakaran Saravanan', 'Workshop'], [101, 'Rickmoy Samanta', 'MEOW']]";
+select table "students" columns "*";
+select table "professors" columns "*";

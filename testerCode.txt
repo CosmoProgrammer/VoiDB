@@ -1,0 +1,3 @@
+delete database called "TestingAfterYears";
+create new database "TestingAfterYears";
+use "TestingAfterYears";
