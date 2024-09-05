@@ -87,9 +87,9 @@ function actionInsert(code, preRunData) {
         values[y][tempCheckerResult["index"]] = hash;
       }
     }
-    console.log(
-      "()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()"
-    );
+    //console.log(
+    //  "()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()"
+    //);
     if (table.values !== false) {
       for (let x in values) {
         table.values.push(values[x]);
