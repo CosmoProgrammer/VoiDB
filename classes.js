@@ -145,6 +145,11 @@ class BodytoDetailsResolver {
       details.username = this.body[2];
       details.password = this.body[5];
       details.table = this.body[7];
+    } else if (this.action === "encrypt") {
+      details.object == this.body[0];
+      details.type = this.body[0];
+      details.name = this.body[1];
+      details.password = this.body[2];
     }
     for (let x in details) {
       if (typeof details[x] !== "boolean") {

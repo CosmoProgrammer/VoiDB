@@ -1,4 +1,18 @@
 {
-  "usingDatabase": "TestingAfterYears",
-  "messageMode": true
+  "usingDatabase": "TestingEnDatabase",
+  "messageMode": true,
+  "encryptedTables": [
+    [
+      "TestingAfterYears",
+      "TestingEn"
+    ],
+    [
+      "TestingEnDatabase",
+      "TestingEn"
+    ],
+    [
+      "TestingEnDatabase",
+      "TestingEnTwo"
+    ]
+  ]
 }
