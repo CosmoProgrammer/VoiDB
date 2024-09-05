@@ -1,0 +1,38 @@
+{
+  "name": "students",
+  "columns": [
+    {
+      "name": "string"
+    },
+    {
+      "username": "string primarykey"
+    },
+    {
+      "pword": "password"
+    }
+  ],
+  "values": [
+    [
+      "Anirudh M",
+      "F2024A7PS0020H",
+      "$2b$10$b0cIsQuA5kKBSO5gYHsi/.YYcIJpK2R7I5Wzz8xC6zXodcm3PaNTO"
+    ],
+    [
+      "Harshul Aggarwal",
+      "F2024A7PS0010",
+      "$2b$10$WDmFSIWOUAvjNHaVyMR8hOuKecaYma1IRVlcEsNA4W0NMf9aIZtaq"
+    ],
+    [
+      "Kaustubh Ghate",
+      "F2024B1PS1071",
+      "$2b$10$hNrjnoj7mhPN7pWNtq/EievdZczs036qJ9eCzAZ3JQP3zcV6E.j0O"
+    ]
+  ],
+  "defaultvalues": [
+    [
+      "Anirudh M",
+      "F2024A7PS0020H",
+      "$2b$10$4bJEaBZqM5LBgo6KLSyA8eqSACSHB2eH1WWwskTHUJMKJvvw8kc0m"
+    ]
+  ]
+}
