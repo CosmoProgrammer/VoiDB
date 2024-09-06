@@ -12,11 +12,13 @@ const rl = readline.createInterface({
 function run(command) {
   try {
     const result = voidb(command);
+    console.log(result);
     if (!result[0].data) {
       console.table(util.inspect(result[0].message, false, null, true));
     } else {
       //console.table(util.inspect(result[0], false, null, true));
       if (typeof result[0].data[0] == "string") {
+        console.log(result[0].data[0]);
         console.table(util.inspect(result[0], false, null, true));
       } else {
         console.log(result[0].info);

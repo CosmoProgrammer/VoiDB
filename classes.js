@@ -1,3 +1,8 @@
+const fs = require("fs");
+const crypto = require("crypto");
+const bcrypt = require("bcrypt");
+const path = require("path");
+
 class Error {
   constructor(type, message) {
     this.type = type;
@@ -96,6 +101,11 @@ class BodytoDetailsResolver {
             }
           }
         }
+        if (this.body[this.body.length - 2] === "p") {
+          details.password = this.body[this.body.length - 1];
+        } else {
+          details.password = false;
+        }
       } else if (this.body[0] === "columns") {
         details.object = "columns";
         details.table = this.body[1];
@@ -156,6 +166,7 @@ class BodytoDetailsResolver {
         details[x] = details[x].replace(/(^"|"$)/g, "");
       }
     }
+    console.log(details);
     return new ActionDetails(this.action, details);
   }
 
@@ -167,6 +178,55 @@ class BodytoDetailsResolver {
   }
 }
 
+class Decrypter {
+  constructor(database, table) {
+    this.database = database;
+    this.table = table;
+  }
+  check() {
+    const configPath = path.join(__dirname, "parser", `config.json`);
+    let config = require(configPath);
+    let tableList = config.encryptedTables;
+    //console.log(tableList);
+    for (let table of tableList) {
+      //console.log(this.database, this.table);
+      if (table[0] == this.database && table[1] == this.table) {
+        return true;
+      }
+    }
+    return false;
+  }
+  decrypt(password) {
+    const ALGORITHM = "aes-256-ctr";
+    const filePath = path.join(
+      __dirname,
+      "storage",
+      `${this.database}`,
+      `${this.table}.json`
+    );
+    const encryptedObject = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    console.log(password, encryptedObject.passwordHash);
+    const passwordMatch = bcrypt.compareSync(
+      password,
+      encryptedObject.passwordHash
+    );
+    if (!passwordMatch) {
+      console.error("Invalid password!");
+      return new Error("Authentication Error", "Passwords don't match");
+    }
+
+    const decipher = crypto.createDecipher(ALGORITHM, password);
+
+    let decryptedData = decipher.update(encryptedObject.data, "hex", "utf8");
+    decryptedData += decipher.final("utf8");
+
+    console.log("File decrypted successfully! The content is:");
+    console.log(JSON.parse(decryptedData));
+
+    return decryptedData;
+  }
+}
+
 module.exports = {
   Error: Error,
   Success: Success,
@@ -174,4 +234,5 @@ module.exports = {
   BodytoDetailsResolver: BodytoDetailsResolver,
   ActionDetails: ActionDetails,
   Data: Data,
+  Decrypter: Decrypter,
 };

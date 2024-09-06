@@ -1,5 +1,5 @@
 {
-  "usingDatabase": "TestingEnDatabase",
+  "usingDatabase": "TestingAfterYears",
   "messageMode": true,
   "encryptedTables": [
     [
@@ -13,6 +13,14 @@
     [
       "TestingEnDatabase",
       "TestingEnTwo"
+    ],
+    [
+      "TestingAfterYears",
+      "td"
+    ],
+    [
+      "TestingAfterYears",
+      "testing2"
     ]
   ]
 }
