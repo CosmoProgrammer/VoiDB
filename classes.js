@@ -133,6 +133,11 @@ class BodytoDetailsResolver {
       details.values = this.body[0];
       details.table = this.body[2];
       details.columns = this.body[4];
+      if (this.body[this.body.length - 2] === "p") {
+        details.password = this.body[this.body.length - 1];
+      } else {
+        details.password = false;
+      }
     } else if (this.action === "delete") {
       if (this.body[0] === "database") {
         details.object = "database";
@@ -145,6 +150,11 @@ class BodytoDetailsResolver {
       }
     } else if (this.action === "truncate") {
       details.table = this.body[0];
+      if (this.body[this.body.length - 2] === "p") {
+        details.password = this.body[this.body.length - 1];
+      } else {
+        details.password = false;
+      }
     } else if (this.action === "use") {
       details.database = this.body[0];
     } else if (this.action === "default") {

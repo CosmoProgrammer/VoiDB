@@ -22,7 +22,11 @@ function run(command) {
         console.table(util.inspect(result[0], false, null, true));
       } else {
         console.log(result[0].info);
-        printTable(result[0].data);
+        if (result[0].data.length !== 0) {
+          printTable(result[0].data);
+        } else {
+          console.log("Table Empty");
+        }
       }
     }
     console.log("\n");

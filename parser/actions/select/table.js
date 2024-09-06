@@ -15,8 +15,8 @@ function selectTable(code, preRunData) {
     code.details.columns = "all";
   }
   let Decrypter = new classes.Decrypter(preRunData[1], code.details.name);
-  console.log(Decrypter.check());
-  console.log(code);
+  //console.log(Decrypter.check());
+  //console.log(code);
   let table = null;
   if (!Decrypter.check()) {
     table = require(storagePath);

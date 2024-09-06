@@ -8,6 +8,10 @@ class hashPassword {
     this.index = index;
   }
 }
+const crypto = require("crypto");
+
+const ALGORITHM = "aes-256-ctr";
+const SALT_ROUNDS = 10;
 
 function valueChecker(columns, values) {
   /*console.log('in valueChecker');
@@ -58,7 +62,15 @@ function actionInsert(code, preRunData) {
       `${preRunData[1]}`,
       `${code.details.table}.json`
     );
-    let table = require(storagePath);
+    let Decrypter = new classes.Decrypter(preRunData[1], code.details.table);
+    //console.log(Decrypter.check());
+    console.log(code);
+    let table = null;
+    if (!Decrypter.check()) {
+      table = require(storagePath);
+    } else {
+      table = JSON.parse(Decrypter.decrypt(code.details.password));
+    }
     if (code.details.columns === "*") {
       code.details.columns = "all";
     }
@@ -66,6 +78,7 @@ function actionInsert(code, preRunData) {
       new classes.ActionDetails("select", {
         object: "columns",
         table: code.details.table,
+        password: code.details.password,
       }),
       preRunData
     ).data;
@@ -105,7 +118,22 @@ function actionInsert(code, preRunData) {
       if (USING_DATABASE === "") {
         return "KeyError: Not using any database currently";
       }
-      fs.writeFileSync(storagePath, JSON.stringify(table, null, 4));
+      if (!Decrypter.check()) {
+        fs.writeFileSync(storagePath, JSON.stringify(table, null, 4));
+      } else {
+        const passwordHash = bcrypt.hashSync(
+          code.details.password,
+          SALT_ROUNDS
+        );
+        const cipher = crypto.createCipher(ALGORITHM, code.details.password);
+        let encryptedData = cipher.update(JSON.stringify(table), "utf8", "hex");
+        encryptedData += cipher.final("hex");
+        const encryptedObject = {
+          passwordHash,
+          data: encryptedData,
+        };
+        fs.writeFileSync(storagePath, JSON.stringify(encryptedObject), "utf-8");
+      }
       if (preRunData[0])
         return new classes.Success(
           `Successfully inserted the values into the table ${table.name}`
