@@ -135,6 +135,7 @@ function createTable(code, preRunData) {
       "A table with that name already exists"
     );
   } else {
+    console.log(table);
     fs.writeFileSync(
       `${storagePath}\\${USING_DATABASE}\\${table.name}.json`,
       JSON.stringify(table, null, 2)

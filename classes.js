@@ -158,6 +158,11 @@ class BodytoDetailsResolver {
     } else if (this.action === "use") {
       details.database = this.body[0];
     } else if (this.action === "default") {
+      if (this.body[this.body.length - 2] === "p") {
+        details.password = this.body[this.body.length - 1];
+      } else {
+        details.password = false;
+      }
       details.table = this.body[0];
     } else if (this.action === "validate") {
       details.usernameColumn = this.body[1];
@@ -165,6 +170,11 @@ class BodytoDetailsResolver {
       details.username = this.body[2];
       details.password = this.body[5];
       details.table = this.body[7];
+      if (this.body[this.body.length - 2] === "p") {
+        details.tpassword = this.body[this.body.length - 1];
+      } else {
+        details.tpassword = false;
+      }
     } else if (this.action === "encrypt") {
       details.object == this.body[0];
       details.type = this.body[0];
@@ -176,7 +186,7 @@ class BodytoDetailsResolver {
         details[x] = details[x].replace(/(^"|"$)/g, "");
       }
     }
-    console.log(details);
+    //console.log(details);
     return new ActionDetails(this.action, details);
   }
 
@@ -215,7 +225,7 @@ class Decrypter {
       `${this.table}.json`
     );
     const encryptedObject = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-    console.log(password, encryptedObject.passwordHash);
+    //console.log(password, encryptedObject.passwordHash);
     const passwordMatch = bcrypt.compareSync(
       password,
       encryptedObject.passwordHash
@@ -230,8 +240,8 @@ class Decrypter {
     let decryptedData = decipher.update(encryptedObject.data, "hex", "utf8");
     decryptedData += decipher.final("utf8");
 
-    console.log("File decrypted successfully! The content is:");
-    console.log(JSON.parse(decryptedData));
+    console.log("File decrypted successfully!");
+    //console.log(JSON.parse(decryptedData));
 
     return decryptedData;
   }
