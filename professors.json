@@ -1,0 +1,27 @@
+{
+  "name": "professors",
+  "columns": [
+    {
+      "id": "number primarykey"
+    },
+    {
+      "name": "string"
+    },
+    {
+      "subject": "string"
+    }
+  ],
+  "values": [
+    [
+      100,
+      "Prabakaran Saravanan",
+      "Workshop"
+    ],
+    [
+      101,
+      "Rickmoy Samanta",
+      "MEOW"
+    ]
+  ],
+  "defaultvalues": false
+}

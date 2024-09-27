@@ -9,7 +9,9 @@ function preRunCheck() {
   let messageMode = config["messageMode"];
   let usingDatabase = config["usingDatabase"];
   let encryptedTables = config["encryptedTables"];
-  return [messageMode, usingDatabase, encryptedTables];
+  let loggedIn = config["login"];
+  let users = config["users"];
+  return [messageMode, usingDatabase, encryptedTables, loggedIn, users];
 }
 
 module.exports = preRunCheck;

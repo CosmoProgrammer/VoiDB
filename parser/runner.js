@@ -8,10 +8,24 @@ const actions = {
   insert: require(`${__dirname}\\actions\\insert\\insert.js`),
   validate: require(`${__dirname}\\actions\\validate\\validate.js`),
   encrypt: require(`${__dirname}\\actions\\encrypt\\encrypt.js`),
+  login: require(`${__dirname}\\actions\\login\\login.js`),
+  authorize: require(`${__dirname}\\actions\\authorize\\authorize.js`),
 };
 
 function run(code, preRunData) {
-  if (code.action === "create") {
+  if ((preRunData[3][1] = 0) && code.details.object !== "database") {
+    if (code.action === "select") {
+      return actions.select(code, preRunData);
+    } else if (code.action === "use") {
+      return actions.use(code, preRunData);
+    } else if (code.action === "validate") {
+      return actions.validate(code, preRunData);
+    } else if (code.action === "login") {
+      return actions.login(code, preRunData);
+    } else {
+      return new Error("Authentication Error", "Not Logged in");
+    }
+  } else if (code.action === "create") {
     return actions.create(code, preRunData);
   } else if (code.action === "use") {
     return actions.use(code, preRunData);
@@ -29,8 +43,13 @@ function run(code, preRunData) {
     return actions.validate(code, preRunData);
   } else if (code.action === "encrypt") {
     return actions.encrypt(code, preRunData);
+  } else if (code.action === "login") {
+    return actions.login(code, preRunData);
+  } else if (code.action === "authorize") {
+    return actions.authorize(code, preRunData);
+  } else {
+    return code.action;
   }
-  return code.action;
 }
 
 module.exports = run;

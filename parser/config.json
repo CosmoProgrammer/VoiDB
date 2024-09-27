@@ -1,6 +1,22 @@
 {
-  "usingDatabase": "TestingAfterYears",
+  "usingDatabase": "NewDatabaseR",
   "messageMode": true,
+  "users": {
+    "NewDatabaseR": {
+      "admin": [
+        "$2b$10$FY1KNauGQ2bjGXn3iREKr.60RD1lm2df58XCR6xYfq8/e8KrwhbmC",
+        1
+      ],
+      "NewUser": [
+        "$2b$10$W6VRcL725xXS2YJg5tgnl.gkyNfD8BwiqhfN6wcVAx3Gnozp0V2YG",
+        "0"
+      ]
+    }
+  },
+  "login": [
+    "NewDatabaseR",
+    0
+  ],
   "encryptedTables": [
     [
       "TestingAfterYears",
@@ -25,6 +41,10 @@
     [
       "TestingAfterYears",
       "t2"
+    ],
+    [
+      "DemoDatabase",
+      "professors"
     ]
   ]
 }

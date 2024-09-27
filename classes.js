@@ -128,6 +128,9 @@ class BodytoDetailsResolver {
       } else if (this.body[0] === "database") {
         details.object = "database";
         details.name = this.body[1];
+        details.admin = this.body[3];
+        details.password = this.body[5];
+        //console.log(details);
       }
     } else if (this.action === "insert") {
       details.values = this.body[0];
@@ -180,6 +183,13 @@ class BodytoDetailsResolver {
       details.type = this.body[0];
       details.name = this.body[1];
       details.password = this.body[2];
+    } else if (this.action === "login") {
+      details.username = this.body[0];
+      details.password = this.body[1];
+    } else if (this.action === "authorize") {
+      details.username = this.body[0];
+      details.password = this.body[1];
+      details.auth = this.body[2];
     }
     for (let x in details) {
       if (typeof details[x] !== "boolean") {

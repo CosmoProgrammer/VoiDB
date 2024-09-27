@@ -15,14 +15,15 @@ select table "NewTable" columns "['pword','name', 'id']" order by "name desc";
 delete database called "NewDatabase";
 create new database called "NewDatabase";
 use "NewDatabase";
-create new table called "NewTable" with columns "[{'id':'number primarykey'}, {'name':'string'}, {'pword':'password'}]" and values "[[101, 'Anirudh M', 'pokemon2345'], [102, 'Mahathi M', '6a6ab836a8'], [103, 'Some Book', '']]" and defaultvalues "[[101, 'Nagalakshmi Abbaraju', '05504503'], [102, 'Rajashekar M', 'Buddi2628!@']]";
+create new table called "NewTable" with columns "[{'id':'number primarykey'}, {'name':'string'}, {'pword':'password'}]" and values "[[101, 'Anirudh M', '5345353'], [102, 'Mahathi M', '35453453'], [103, 'Some Book', '']]" and defaultvalues "[[101, 'Nagalakshmi Abbaraju', '34543543'], [102, 'Rajashekar M', 'w3453453']]";
+create new table called "t2" with columns "[{'id':'number primarykey'}, {'name':'string'}, {'pword':'password'}]" and values "[[101, 'Anirudh M', 'testing'], [102, 'Mahathi M', 'tester']]" and defaultvalues "[[101, 'Anirudh M', 'testing'], [102, 'Mahathi M', 'tester']]";
 truncate "NewTable";
 default "NewTable";
 select databases;
 select tables;
 select columns "NewTable";
 select table "NewTable" columns "['pword','name', 'id']" where "name === 'Nagalakshmi Abbaraju' || id === 102";
-insert "[[104, 'Nagalakshmi Abbaraju', '05504503'], [105, 'Rajashekar M', 'Buddi2628!@']]" into "NewTable" columns "*";
+insert "[[104, 'Nagalakshmi Abbaraju', '782937492'], [105, 'Rajashekar M', '2342304933']]" into "NewTable" columns "*";
 
 
 
@@ -34,30 +35,24 @@ insert "[[104, 'Nagalakshmi Abbaraju', '05504503'], [105, 'Rajashekar M', 'Buddi
 delete database called "NewDatabase";
 create new database called "NewDatabase";
 use "NewDatabase";
-create new table called "NewTable" with columns "[{'id':'number primarykey'}, {'name':'string'}, {'pword':'password'}]" and values "[[101, 'Anirudh M', 'pokemon2345'], [102, 'Mahathi M', '6a6ab836a8'], [103, 'Srikari Seethiraju', 'ladidadida']]";
+create new table called "NewTable" with columns "[{'id':'number primarykey'}, {'name':'string'}, {'pword':'password'}]" and values "[[101, 'Anirudh M', '7492837492'], [102, 'Mahathi M', '234234234'], [103, 'Srikari Seethiraju', 'ladidadida']]";
 select table "NewTable" columns "*";
 select table "NewTable" columns "['pword','name', 'id']" where "name === 'Anirudh M' || id === 102" order by "id desc";
-insert "[[104, 'Nagalakshmi Abbaraju', '05504503'], [105, 'Rajashekar M', 'Buddi2628!@']]" into "NewTable" columns "*";
+insert "[[104, 'Nagalakshmi Abbaraju', '782937492'], [105, 'Rajashekar M', '2342304933']]" into "NewTable" columns "*";
 select table "NewTable" columns "*";
-
-
-
-
-
-
-delete database called "NewDatabase";
-create new database called "NewDatabase";
-use "NewDatabase";
-create new table called "NewTable" with columns "[{'id':'number primarykey'}, {'name':'string'}, {'pword':'password'}]" and values "[[101, 'Anirudh M', 'pokemon2345'], [102, 'Mahathi M', '6a6ab836a8'], [103, 'Srikari Seethiraju', 'ladidadida']]";
-select table "NewTable" columns "*";
-select table "NewTable" columns "['pword','name', 'id']" where "name === 'Anirudh M' || id === 102" order by "id desc";
-insert "[[104, 'Nagalakshmi Abbaraju', '05504503'], [105, 'Rajashekar M', 'Buddi2628!@']]" into "NewTable" columns "*";
-select table "NewTable" columns "*";
-validate username "name" "Mahathi M" password "pword" "6a6ab836a8" table "NewTable";
+validate username "name" "Mahathi M" password "pword" "234234234" table "NewTable";
 
 create new database "TestingAfterYears";
-use database "TestingAfterYears";
-create new table "students" with columns "[{'name':'string'}, {'username':'string primarykey'}, {'pword':'password'}]" amd values "[['Anirudh M', 'F2024A7PS0020H', 'testing1234'], ['Harshul Aggarwal', 'F2024A7PS0010', 'roommateperks'], ['Kaustubh Ghate', 'F2024B1PS1071', 'bastarddidntfreezecampus']]" and defaultvalues "[['Anirudh M', 'F2024A7PS0020H', 'testing1234']]";
+use "TestingAfterYears";
+create new table "students" with columns "[{'name':'string'}, {'username':'string primarykey'}, {'pword':'password'}]" and values "[['Anirudh M', 'F2024A7PS0020H', 'testing1234'], ['Harshul Aggarwal', 'F2024A7PS0010', 'roommateperks'], ['Kaustubh Ghate', 'F2024B1PS1071', 'bastarddidntfreezecampus']]" and defaultvalues "[['Anirudh M', 'F2024A7PS0020H', 'testing1234']]";
 create new table "professors" with columns "[{'id': 'number primarykey'}, {'name':'string'}, {'subject':'string'}]" and values "[[100, 'Prabakaran Saravanan', 'Workshop'], [101, 'Rickmoy Samanta', 'MEOW']]";
 select table "students" columns "*";
 select table "professors" columns "*";
+
+insert "[[104, 'Nagalakshmi Abbaraju', '782937492'], [105, 'Rajashekar M', '2342304933']]" into "NewTable" columns "*";
+insert "[[100, 'Prabakaran Saravanan', 'Workshop'], [101, 'Rickmoy Samanta', 'MEOW']]" into "testing2" columns "*" -p "test";
+
+create new database called "NewDatabaseR" admin "Admin" password "123";
+
+authorize "NewUser" 1/2?
+login "" "";
