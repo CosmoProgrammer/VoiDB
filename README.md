@@ -5,11 +5,9 @@ The project saves all the data given to it in JSON files. It comes with a langua
 
 ## Installation
 
-Currently not available for direct installation as a module; development is ongoing. 
+Currently not available for direct installation as a module; development is ongoing. However, a REPL has been made and included in this repo for use. The REPO also includes a script that will run all the lines of code in a VoiDB script file (A file named testerCode.txt has been provided in the repo. The program tester.js, run with node, will automatically run the code in testerCode.txt.)
 
 ## Usage
-
-The following repo comes with a file named testerCode.txt. The program tester.js, run with node, will automatically run the code in testerCode.txt.
 
 VoiDB is a simple language that is written in a more human and readable format. The syntax is simple to use, and the details are given below. Note that the language comes with words such as 'called' that are optional and are removed automatically while processing anyway. They are merely there to improve the readability of the language. 
 
@@ -56,6 +54,25 @@ Truncate removes all values in the table, and delete deletes the entire table
 ```
 insert "[['Aditya Sundar, 'F2024B1PS0100H', 'havingfuninlife']]" into "students" columns "*";
 ```
+
+### Encrypting Tables/Databases
+```
+encrypt table "students" "pass123";
+encrypt database "TestingAfterYears" "pass1234";
+```
+This command encrypts all the data saved in the named table or encrypts all the tables in the named database (all with the same given password). From that point on, the data is never stored in the storage unencrypted.
+To access or modify data in any encrypted table, the -p modifier has to be used.
+```
+select table "students" columns "['pword','name', 'username']" where "name === 'Anirudh M' || username === 'F2024B1PS1071'" order by "username desc" -p "pass123";
+insert "[['Aditya Sundar, 'F2024B1PS0100H', 'havingfuninlife']]" into "students" columns "*" -p "pass123";
+```
+Note that a table cannot be permanently saved as decrypted once it has been encrypted for security reasons.
+
+### Uploading Table JSON file into a database manually
+```
+create table -d "{file path here}.json";
+```
+Assuming that the JSON file given is of valid format, the table is uploaded to the database currently being used and will be accessible through the other commands.
 
 Detailed tutorials and documentation will be made available soon.
 
