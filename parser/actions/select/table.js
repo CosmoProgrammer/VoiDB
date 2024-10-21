@@ -23,7 +23,7 @@ function selectTable(code, preRunData) {
   } else {
     table = JSON.parse(Decrypter.decrypt(code.details.password));
   }
-  console.log(table.values);
+  //console.log(table.values);
   return findTypeAndExecute(code.details, preRunData, table);
 }
 
