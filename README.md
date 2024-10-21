@@ -11,6 +11,10 @@ Now available for direct installation as a module. A REPL has been made and incl
 
 VoiDB is a simple language that is written in a more human and readable format. The syntax is simple to use, and the details are given below. Note that the language comes with words such as 'called' that are optional and are removed automatically while processing anyway. They are merely there to improve the readability of the language.
 
+```
+const voidb = require('voidb');
+```
+
 ### Creating a new database
 
 ```
