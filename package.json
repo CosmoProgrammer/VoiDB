@@ -1,6 +1,6 @@
 {
   "name": "voidb",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "VoiDB is a NoSQL project that aims to remove the use of SQL Databases",
   "main": "index.js",
   "scripts": {
